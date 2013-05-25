@@ -1,0 +1,11 @@
+install:
+	put the folder under ${TORCS_BASE}/src
+	$ make
+	
+use:
+	compile with flags
+		-L${TORCS_BASE}/export/lib
+		-I${TORCS_BASE}/export/include
+		-ltti -ltgf -ltxml
+	and 
+		export LD_LIBRARY_PATH="${TORCS_BASE}/export/lib"
