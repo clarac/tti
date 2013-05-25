@@ -8,15 +8,11 @@
 #	g++ -Wall -c ${INC} -o tti.o TTI.cpp
 
 
-ROBOT       = tti
-MODULE      = libtti.so
-MODULEDIR   = lib
+SOLIBRARY = libtti.so
 SOURCES     = tti.cpp
 
-SHIPDIR     = 
-SHIP        = 
-SHIPSUBDIRS =
+EXPDIR  = include
 
-PKGSUBDIRS  = ${SHIPSUBDIRS}
+EXPORTS = tti.h
 
 include ${MAKE_DEFAULT}
