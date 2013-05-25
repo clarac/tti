@@ -1,8 +1,8 @@
 
 #include "tti.h"
 #include <tgf.h>
-
-
+#include <wordexp.h>
+ 
 tti::tti() {
 
 }
@@ -12,13 +12,15 @@ tti::~tti() {
 
 
 FILE * tti::callT(int cars, int laps, std::string track, int dind, std::string driver){
-	void *parmHandle = GfParmReadFile("/home/clara/.torcs/results/practice.xml", GFPARM_RMODE_STD);
+	std::string path = std::string(getenv("HOME"))+"/.tti/setups/practice.xml";
+	std::string cmd = "torcs -r " + path;
+	void *parmHandle = GfParmReadFile(path.c_str(), GFPARM_RMODE_STD);
 	GfParmSetNum(parmHandle, "Practice", "laps", NULL, laps);
 	GfParmSetStr(parmHandle, "Tracks/1", "name", track.c_str());
 	GfParmSetNum(parmHandle, "Drivers/1", "idx", NULL, dind);
 	GfParmSetStr(parmHandle, "Drivers/1", "module", driver.c_str());
 	GfParmWriteFile (NULL, parmHandle, NULL);
-	return popen("torcs -r /home/clara/.torcs/results/practice.xml", "r");
+	return popen(cmd.c_str(), "r"); 
 }         
 
 
