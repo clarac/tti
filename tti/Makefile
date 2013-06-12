@@ -1,18 +1,12 @@
 
-#INC = -I${TORCS_BASE}/src/libs/tgf -I${TORCS_BASE}/src/linux
-
-#tti: tti.o
-#	g++ -o tti tti.o
-
-#tti.o: TTI.cpp
-#	g++ -Wall -c ${INC} -o tti.o TTI.cpp
-
-
 SOLIBRARY = libtti.so
-SOURCES     = tti.cpp
+SOURCES   = tti.cpp SimpleParser.cpp WrapperBaseDriver.cpp CarControl.cpp CarState.cpp
 
 EXPDIR  = include
 
-EXPORTS = tti.h
+EXPORTS = tti.h WrapperBaseDriver.h
 
 include ${MAKE_DEFAULT}
+
+LDFLAGS += -std=c++11 -pthread
+CXXFLAGS += -std=c++11 -pthread
