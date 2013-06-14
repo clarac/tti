@@ -70,7 +70,7 @@
  				( fabs(maxAngle*__PI/18 - __PI/2 - current.getAngle())<__PI/8))
 
 //#define leftCurve ((current.getTrack(11+angleOffset)+current.getTrack(10+angleOffset))<(current.getTrack(8+angleOffset)+current.getTrack(7+angleOffset)))
-#define leftCurve (maxAngle<9);
+#define leftCurve (maxAngle<9)
 #define rightCurve (maxAngle>9)
 
 
@@ -101,9 +101,9 @@ public:
 		stuck=0;
 		clutch=0.0;
 		insideTolerance=0.75;
-		straightTolerance=60; 
+		straightTolerance=100; 
 		accelSensitivity=3;
-		maxSpeed=220;
+		maxSpeed=190;
 		minSpeed=50;
 		/* Stuck constants*/
 		stuckTime = 25;

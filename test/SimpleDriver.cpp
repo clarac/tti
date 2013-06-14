@@ -138,7 +138,7 @@ SimpleDriver::getAccel()
 
         float targetSpeed;
         float cSensor=current.getTrack(9);
-        float bSensor=current.getTrack(maxAngle);
+        float bSensor=current.getTrack((leftCurve?8:10));
         //float rxSensor=maxLeft;
         //float sxSensor=maxRight;
 
@@ -151,7 +151,7 @@ SimpleDriver::getAccel()
         { 
             float sen, coss, aux1, aux2;
             int dif = fabs(maxAngle-9);
-            sen=sin5;  
+           /* sen=sin5;  
             coss=cos5;
 
             while(dif>1){
@@ -165,12 +165,10 @@ SimpleDriver::getAccel()
                     coss=aux2*cos5-aux1*sin5;
                     dif--;
                 }
-            }
-            //cos(A+B) = cos(A)cos(B) - sin(A)sin(B)
-            //sin(A+B) = sin(A)cos(B) + cos(A)sin(B)
-            // computing approximately the "angle" of turn
-            float h = current.getTrack(9)*sen;
-            float b = bSensor - cSensor*coss;
+            }*/
+
+            float h = current.getTrack(9)*sin5;
+            float b = bSensor - cSensor*cos5;
             float sinAngle = b*b/(h*h+b*b);
             // estimate the target speed depending on turn and on how close it is
             targetSpeed = maxSpeed*(cSensor*sinAngle/maxSpeedDist);
@@ -268,7 +266,7 @@ SimpleDriver::wDrive(CarState cs)
         clutching(clutch);
 
         // build a CarControl variable and return it
-        std::cout.precision(4);
+        /*std::cout.precision(4);
 
         std::cout<<segString(curSeg)<<" "<<segString(lookahead);
         std::cout<<maxAngle<<" "<<accel<<" "<<brake<<" "<<steer ;
@@ -276,7 +274,7 @@ SimpleDriver::wDrive(CarState cs)
         for(int i=6;i<14;i++){
             std::cout << current.getTrack(i) << " ";
         }
-        std::cout<<")"<<std::endl;
+        std::cout<<")"<<std::endl;*/
         
         CarControl cc(accel,brake,gear,steer,clutch);
         return cc;

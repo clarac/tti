@@ -11,7 +11,8 @@ tti::tti(std::vector<WrapperBaseDriver*> dv){
 
 
 FILE * tti::callTL(int laps, std::string track, int dind, std::string driver){
-	std::string path = std::string(getenv("HOME"))+"/.tti/setups/practice.xml";
+	//std::string path = std::string(getenv("TORCS_BASE"))+"src/tti/setups/practice.xml";
+	std::string path = xmlFolder+"practice.xml";
 	std::string cmd = "torcs -r " + path;
 	void *parmHandle = GfParmReadFile(path.c_str(), GFPARM_RMODE_STD);
 	GfParmSetNum(parmHandle, "Practice", "laps", NULL, laps);
@@ -23,7 +24,8 @@ FILE * tti::callTL(int laps, std::string track, int dind, std::string driver){
 } 
 
 FILE * tti::callT(int laps, std::string track, WrapperBaseDriver *driver){
-	std::string path = std::string(getenv("HOME"))+"/.tti/setups/practice_server.xml";
+	//std::string path = std::string(getenv("TORCS_BASE"))+"src/tti/setups/practice_server.xml";
+	std::string path = xmlFolder+"practice_server.xml";
 	std::string cmd = "torcs -r " + path;
 	void *parmHandle = GfParmReadFile(path.c_str(), GFPARM_RMODE_STD);
 	GfParmSetNum(parmHandle, "Practice", "laps", NULL, laps);
@@ -47,8 +49,7 @@ void tti::callTMult(int laps, std::string track){
 	if(size<1)
 		return;
 	std::string sz=std::to_string(size);
-	std::string path = std::string(getenv("HOME"))+"/.tti/setups/quickrace"+sz+".xml";
-	//std::cout << path<< std::endl;
+	std::string path = xmlFolder+"quickrace"+sz+".xml";
 	std::string cmd = "torcs -r " + path;
 	void *parmHandle = GfParmReadFile(path.c_str(), GFPARM_RMODE_STD);
 	GfParmSetNum(parmHandle, "Quick Race", "laps", NULL, laps);
@@ -69,7 +70,7 @@ void tti::callTMult(int laps, std::string track){
 		tds.pop_back();
 	} 
 }     
-
+  
 void tti::callTGUI(){
 	int size = drivers.size();
 
@@ -252,17 +253,21 @@ std::vector<raceData> tti::raceGUI(){
 }
 
 float tti::getAvg(std::vector<float> values, int from, int to){
+	if(values.empty())
+		return 0;
 	if(to==-1)
-		to=values.size();
-	if(to<=from)
+		to=values.size()-1;
+	if(to<from||to>=values.size())
 		return 0;
 	else
-		return getTotal(values, from, to)/(to-from);
+		return getTotal(values, from, to)/(1+to-from);
 }
 
 float tti::getTotal(std::vector<float> values, int from, int to){
 	int total=0;
-	if(to==-1 && !values.empty())
+	if(values.empty())
+		return 0;
+	if(to==-1)
 		to=values.size();
 	for(int i=from;i<to;i++){
 		total+=values[i];

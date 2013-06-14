@@ -10,3 +10,4 @@ include ${MAKE_DEFAULT}
 
 LDFLAGS += -std=c++11 -pthread
 CXXFLAGS += -std=c++11 -pthread
+CFLAGSD += -std=c++11 -pthread

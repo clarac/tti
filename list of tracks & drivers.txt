@@ -22,6 +22,6 @@ brondehach  e-track-3  g-track-2  ole-road-1  street-1
 
 drivers:
 
-berniw   (botc)       damned   inferno2  olethros    tita
+berniw                damned   inferno2  olethros    tita
 berniw2  bt           human    lliaw     (scr_server)
 berniw3  inferno      sparkle
