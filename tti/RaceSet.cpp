@@ -1,21 +1,22 @@
 #include "RaceSet.h"
+#include <sys/stat.h>
 
 RaceSet::RaceSet(std::vector<Race> races, std::string folder, int carQty){
 	this->races=races;	
 	this->folder=folder;
 	this->carQty=carQty;
-	if(carQty<1||carQty>10){
-		
-		std::cout<<"RaceSet construction failed: car quantity outside limits [1,10]"<<std::endl;
 
+	if(carQty<1||carQty>10){		
+		std::cout<<"RaceSet construction failed: car quantity outside limits [1,10]"<<std::endl;
+		throw 1;
 	} else
 		init();	
 }
 
-RaceSet::RaceSet(std::string configXML, int carQty) {
+RaceSet::RaceSet(std::string configXML, int carQty, std::string folder) {
 
 	this->carQty=carQty;
-
+	xmlOut=folder;
 	if(carQty<1||carQty>10){
 		std::cout<<"RaceSet construction failed: car quantity outside limits [1,10]"<<std::endl;
 		throw 1;
@@ -42,7 +43,13 @@ void RaceSet::init(){
 void RaceSet::genXML(){
 	std::string path = xmlFolder+"quickrace"+std::to_string(carQty)+".xml";
 	void *parmHandle = GfParmReadFile(path.c_str(), GFPARM_RMODE_CREAT);
-	// criar diretorio se nao existir
+	int ret =mkdir(folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+	if(ret<0&&errno!=EEXIST){
+		std::cout<<"Race failed: Unable to access xml directory"<<std::endl;
+		throw 1;
+	}
+
 	for(int i=0;i<qty;i++){		
 		GfParmSetNum(parmHandle, "Quick Race", "laps", NULL, races[i].laps);
 		GfParmSetNum(parmHandle, "Quick Race", "distance", NULL, races[i].distance);
@@ -57,7 +64,7 @@ void RaceSet::readConfig(std::string configXML){
 	void *parmHandle = GfParmReadFile(configXML.c_str(), GFPARM_RMODE_STD);
 
 	std::string id=GfParmGetStr(parmHandle, "Header", "id", "default");
-	folder=xmlFolder+id+"/";
+	folder=xmlOut+id+"/";
 
 
 
@@ -110,4 +117,8 @@ std::string RaceSet::getNextXML(){
 	std::string num=std::to_string(next);
 	next=(next+1)%qty;
 	return folder+"r"+num+".xml";	
+}
+
+void RaceSet::restartRound(){
+	next=0;
 }

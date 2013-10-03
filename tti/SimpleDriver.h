@@ -24,7 +24,7 @@
 #include "SimpleParser.h"
 #include "WrapperBaseDriver.h"
 
-#define PI 3.14159265
+#define _PI 3.14159265
 
 using namespace std;
 

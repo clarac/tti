@@ -1,3 +1,6 @@
+#ifndef CLIENT_H_
+#define CLIENT_H_
+
 #include <netdb.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -201,3 +204,5 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
 }
 
 };
+
+#endif /*CLIENT_H_*/
