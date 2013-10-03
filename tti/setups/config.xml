@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE params SYSTEM "params.dtd">
+
+
+<params name="config">
+  <section name="Header">
+    <attstr name="id" val="teste1"/>
+  </section>
+
+  <section name="Races">
+    <section name="1">
+      <attstr name="track" val="g-track-1"/>
+      <attnum name="distance" val="0"/>
+      <attnum name="laps" val="2"/>
+    </section>
+    <section name="2">
+      <attstr name="track" val="g-track-2"/>
+      <attnum name="distance" val="15"/>
+      <attnum name="laps" val="0"/>
+    </section>
+    <section name="3">
+      <attstr name="track" val="g-track-3"/>
+      <attnum name="distance" val="15"/>
+      <attnum name="laps" val="0"/>
+    </section>
+  </section>
+</params>
