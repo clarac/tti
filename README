@@ -1,5 +1,5 @@
 install:
-	put the folder under ${TORCS_BASE}/src
+	put the tti folder under ${TORCS_BASE}/src
 	$ make
 	
 use:
