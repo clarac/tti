@@ -17,6 +17,8 @@
 static std::string xmlFolder = std::string(getenv("TORCS_BASE"))+ "/src/tti/setups/";
 
 
+
+
 /**
 * Basic settings for races: track and distance/laps
 */
@@ -27,7 +29,7 @@ struct Race
 };
 
 /**
-* This class is responsible for reading the configuration, generating individual xmls and invoking TORCS.
+* This class is responsible for reading the configuration and generating individual xmls.
 * @todo add information about the configuration here
 */
 class RaceSet {

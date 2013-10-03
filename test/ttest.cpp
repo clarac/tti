@@ -20,13 +20,7 @@ int main(){
 				std::cout << rd[i].timeList[j]<<std::endl;
 			}	
 		}
-	}
-
-	
-
-	
-	
-	
+	}	
 	return 0;    
 }
 

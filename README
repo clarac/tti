@@ -1,11 +1,58 @@
-install:
-	put the tti folder under ${TORCS_BASE}/src
-	$ make
+TTI is a tool developed to help the testing of TORCS drivers running in client-server mode. 
+It is under development, currently only available for linux environments with limited testing done.
+
+This library is intended for the necessary steps of performance evaluation during a process of developing
+algorithms for drivers, or for modifying numeric settings in order to optimize their abilities. Because TORCS TUI is used,
+and it was only introduced in v1.3.3, TTI is not compatible with earlier versions of the simulator.
+
+Although a few limitations on the code for a driver are introduced, e.g. its performance should not depend on 
+the client file, this library provides easy testing and comparing for a group of up to 10 drivers at once
+in multiple, easily configured races. After testing is no longer needed, just making a substitution of 
+the SimpleDriver for the new driver class along with any created additionally to the TORCS client code 
+provided should make it run normally as well as it did during development.
+
+Compilation will generate a shared object file and link it in ${TORCS_BASE}/export/lib.
+The folder _test_ contains an example of how TTI can be used, more details can be found below.
+
+
+Installation:
+
+	copy the tti folder into ${TORCS_BASE}/src/ 
+	$ cd ${TORCS_BASE}/src/tti
+	$ make install
+	$ make export
 	
-use:
-	compile with flags
+ 
+
+Example code:
+
+	#include "tti.h"
+	#include "SimpleDriver.cpp"
+
+	int main(){
+		  
+		SimpleDriver *d = new SimpleDriver();
+		std::vector<WrapperBaseDriver *> dv;
+		
+		dv.push_back(d);
+	  
+		tti t(dv);
+		
+		std::vector<raceData> rd = t.race();
+		   
+	}
+
+
+	compile your code with flags
 		-L${TORCS_BASE}/export/lib
 		-I${TORCS_BASE}/export/include
 		-ltti -ltgf -ltxml
-	and 
-		export LD_LIBRARY_PATH="${TORCS_BASE}/export/lib"
+
+	and include torcs/export/lib in your library path
+
+	$ LD_LIBRARY_PATH=${TORCS_BASE}/export/lib:$LD_LIBRARY_PATH
+
+
+For full documentation:
+
+	$make doc
