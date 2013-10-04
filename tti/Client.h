@@ -59,13 +59,6 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
         exit(1);
     }
 
-    // Print command line option used
-    //cout << "***********************************" << endl;
-    //cout << "HOST: "   << hostName    << endl;
-    //cout << "PORT: " << serverPort  << endl;
-    //cout << "ID: "   << id     << endl;
-    //cout << "***********************************" << endl;
-
     // Create a socket (UDP on IPv4 protocol)
     socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0);
     if (INVALID(socketDescriptor))
@@ -160,7 +153,6 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                 {
                     driver->onShutdown();
                     shutdownClient = true;
-                    //cout << "Client Shutdown" << endl;
                     break;
                 }
 
@@ -187,10 +179,6 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                     exit(1);
                 }
                 _print2("Sending ",buf);
-            }
-            else
-            {
-                //cout << "** Server did not respond in 1 second.\n";
             }
         }
     } while(shutdownClient==false);
