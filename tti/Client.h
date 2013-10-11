@@ -1,3 +1,28 @@
+/***************************************************************************
+ 
+    file                 : Client.h
+    copyright            : (C) 2007 Daniele Loiacono
+                           (C) 2013 Clara Caldeira
+ 
+ ***************************************************************************/
+
+/***************************************************************************
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.  
+
+ ***************************************************************************/
+
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
@@ -13,23 +38,17 @@
 
 using namespace std;
 
-class SimpleDriver;
 
+
+/** Holds the client code for UDP connections */
 namespace client {
 
-	/*** defines for UDP *****/
+/*** defines for UDP *****/
 #define UDP_MSGLEN 1000
 #define UDP_CLIENT_TIMEUOT 1000000
-//#define __UDP_CLIENT_VERBOSE__
 /************************/
 
-#ifdef __UDP_CLIENT_VERBOSE__
-#define _print(a) cout << a << endl;
-#define _print2(a,b) cout << a << b << endl;
-#else
-#define _print(a) 
-#define _print2(a,b) 
-#endif
+
 
 typedef int SOCKET;
 typedef struct sockaddr_in tSockAddrIn;
@@ -39,7 +58,7 @@ typedef struct sockaddr_in tSockAddrIn;
 using namespace std;
 
 
-
+/** Handles the connection */
 void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDriver *driver)
 {
     SOCKET socketDescriptor;
@@ -88,9 +107,9 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
 
         	string initString = SimpleParser::stringify(string("init"),angles,19);
 
-            _print2("Sending id to server: ", id);
+            
             initString.insert(0,id);
-            _print2("Sending init string to the server: ",initString);
+           
 
             if (sendto(socketDescriptor, initString.c_str(), initString.length(), 0,
                        (struct sockaddr *) &serverAddress,
@@ -118,7 +137,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                 }
 				else
 				{
-                	_print2("Received: ",buf);
+                	
 
                 	if (strcmp(buf,"***identified***")==0)
                     		break;
@@ -147,7 +166,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                     exit(1);
                 }
 
-                _print2("Received: ",buf);
+                
 
                 if (strcmp(buf,"***shutdown***")==0)
                 {
@@ -178,7 +197,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                     CLOSE(socketDescriptor);
                     exit(1);
                 }
-                _print2("Sending ",buf);
+                
             }
         }
     } while(shutdownClient==false);
