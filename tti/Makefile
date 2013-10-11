@@ -1,10 +1,10 @@
 
 SOLIBRARY = libtti.so
-SOURCES   = tti.cpp  SimpleParser.cpp WrapperBaseDriver.cpp CarControl.cpp CarState.cpp RaceSet.cpp
+SOURCES   = TTI.cpp  SimpleParser.cpp WrapperBaseDriver.cpp CarControl.cpp CarState.cpp RaceSet.cpp
 
 EXPDIR  = include
 
-EXPORTS = tti.h WrapperBaseDriver.h RaceSet.h Client.h CarControl.h CarState.h SimpleParser.h BaseDriver.h
+EXPORTS = TTI.h WrapperBaseDriver.h RaceSet.h Client.h CarControl.h CarState.h SimpleParser.h BaseDriver.h
 
 include ${MAKE_DEFAULT}
 

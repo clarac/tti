@@ -1,18 +1,8 @@
 TTI is a tool developed to help the testing of TORCS drivers running in client-server mode. 
-It is under development, currently only available for linux environments with limited testing done.
+It is under development, currently only available for linux environments with limited testing done. TTI was created by Clara Caldeira (claramcaldeira@gmail.com) and is licensed under the terms of the GNU General Public License (GPL 3).
 
 This library is intended for the necessary steps of performance evaluation during a process of developing
-algorithms for drivers, or for modifying numeric settings in order to optimize their abilities. Because TORCS TUI is used,
-and it was only introduced in v1.3.3, TTI is not compatible with earlier versions of the simulator.
-
-Although a few limitations on the code for a driver are introduced, e.g. its performance should not depend on 
-the client file, this library provides easy testing and comparing for a group of up to 10 drivers at once
-in multiple, easily configured races. After testing is no longer needed, just making a substitution of 
-the SimpleDriver for the new driver class along with any created additionally to the TORCS client code 
-provided should make it run normally as well as it did during development.
-
-Compilation will generate a shared object file and link it in ${TORCS_BASE}/export/lib.
-The folder _test_ contains an example of how TTI can be used, more details can be found below.
+algorithms for drivers, or for modifying numeric settings in order to optimize their abilities. Because TORCS's command line mode is used, and it was only introduced in v1.3.3, TTI is not compatible with earlier versions of the simulator.
 
 
 Installation:
@@ -21,26 +11,6 @@ Installation:
 	$ cd ${TORCS_BASE}/src/tti
 	$ make install
 	$ make export
-	
- 
-
-Example code:
-
-	#include "tti.h"
-	#include "SimpleDriver.cpp"
-
-	int main(){
-		  
-		SimpleDriver *d = new SimpleDriver();
-		std::vector<WrapperBaseDriver *> dv;
-		
-		dv.push_back(d);
-	  
-		tti t(dv);
-		
-		std::vector<raceData> rd = t.race();
-		   
-	}
 
 
 	compile your code with flags
@@ -53,9 +23,10 @@ Example code:
 	$ LD_LIBRARY_PATH=${TORCS_BASE}/export/lib:$LD_LIBRARY_PATH
 
 
-For full documentation:
+For full documentation (requires Doxygen):
 
 	$make doc
+
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
