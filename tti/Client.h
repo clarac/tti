@@ -35,6 +35,7 @@
 #include <cstring>
 #include "WrapperBaseDriver.h"
 #include "SimpleParser.h"
+#include <stdio.h>
 
 using namespace std;
 
@@ -59,8 +60,8 @@ using namespace std;
 
 
 /** Handles the connection */
-void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDriver *driver)
-{
+void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDriver *driver){
+
     SOCKET socketDescriptor;
     int numRead;
 
@@ -69,6 +70,9 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
     struct timeval timeVal;
     fd_set readSet;
     char buf[UDP_MSGLEN];
+
+
+ 
 
     hostInfo = gethostbyname(hostName.c_str());
 
@@ -82,7 +86,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
     socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0);
     if (INVALID(socketDescriptor))
     {
-        cerr << "cannot create socket\n";
+        cout << "cannot create socket\n";
         exit(1);
     }
 
@@ -92,7 +96,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
            hostInfo->h_addr_list[0], hostInfo->h_length);
     serverAddress.sin_port = htons(serverPort);
 
-    bool shutdownClient=false;
+    bool shutdownClient=true;
 
     do
     {
@@ -115,7 +119,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                        (struct sockaddr *) &serverAddress,
                        sizeof(serverAddress)) < 0)
             {
-                cerr << "cannot send data ";
+                cout << "cannot send data ";
                 CLOSE(socketDescriptor);
                 exit(1);
             }
@@ -133,7 +137,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                 numRead = recv(socketDescriptor, buf, UDP_MSGLEN, 0);
                 if (numRead < 0)
                 {
-                    cerr << "didn't get response from server...";
+                    cout << "didn't get response from server...";
                 }
 				else
 				{
@@ -153,15 +157,17 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
             FD_SET(socketDescriptor, &readSet);
             timeVal.tv_sec = 0;
             timeVal.tv_usec = UDP_CLIENT_TIMEUOT;
-
+            
             if (select(socketDescriptor+1, &readSet, NULL, NULL, &timeVal))
             {
                 // Read data sent by the solorace server
                 memset(buf, 0x0, UDP_MSGLEN);  // Zero out the buffer.
                 numRead = recv(socketDescriptor, buf, UDP_MSGLEN, 0);
+                
+
                 if (numRead < 0)
                 {
-                    cerr << "didn't get response from server?";
+                    cout << "didn't get response from server?";
                     CLOSE(socketDescriptor);
                     exit(1);
                 }
@@ -177,6 +183,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
 
                 if (strcmp(buf,"***restart***")==0)
                 {
+                    shutdownClient=false;
                     driver->onRestart();
                     cout << "Client Restart" << endl;
                     break;
@@ -193,7 +200,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                            (struct sockaddr *) &serverAddress,
                            sizeof(serverAddress)) < 0)
                 {
-                    cerr << "cannot send data ";
+                    cout << "cannot send data ";
                     CLOSE(socketDescriptor);
                     exit(1);
                 }
@@ -201,8 +208,9 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
             }
         }
     } while(shutdownClient==false);
+    
 
-    if (shutdownClient==false)
+    //if (shutdownClient==false)
 	driver->onShutdown();
     CLOSE(socketDescriptor);
 

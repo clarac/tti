@@ -45,14 +45,15 @@ TTI::TTI(std::vector<WrapperBaseDriver*> dv,std::string config, std::string fold
 
 
 void TTI::callRace(bool callTorcs){
+	FILE *p=NULL;
 	int size = drivers.size();
-
+	
 
 	std::thread torcs;
-
+	
 	if(callTorcs){
 		std::string cmd = "torcs -r " + races.getNextXML();
-		torcs=std::thread(popen, cmd.c_str(), "r");	
+		p = popen(cmd.c_str(),"r");	
 	}		
 	std::vector<std::thread*> tds;
 	for(int i=0;i<size;i++){
@@ -61,13 +62,24 @@ void TTI::callRace(bool callTorcs){
 		tds.push_back(cl);
 	}
 
-	if(callTorcs){
-		torcs.join();
-	}
-    for(int i=0;i<size;i++){
+	char output[500];
+    if(p != NULL) {
+       	while(fgets(output, sizeof(output), p) != NULL) {
+       		//cout<<output<<endl;
+       	}
+       pclose(p);
+     }
+
+
+	for(int i=0;i<size;i++){
 		tds[i]->join();
 
 	} 
+
+
+	
+	
+    
 
 	raceIndex=(raceIndex+1)%race_qty;
 	
@@ -82,8 +94,11 @@ std::vector<raceData> TTI::race(){
 	std::vector<raceData> ret;
 
 	
+	
 	if(ready&&!drivers.empty()){
+		
 		TTI::callRace();
+
 		int size=drivers.size();
 		for(int i=0;i<size;i++){
 			rd.damage=drivers[i]->current.getDamage();
@@ -94,7 +109,7 @@ std::vector<raceData> TTI::race(){
 			ret.push_back(rd);
 		}	
 	}
-
+	
 	return ret;
 }
 
