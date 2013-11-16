@@ -105,11 +105,11 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
         ***********************************************************************************/
         do
         {
-        	// Initialize the angles of rangefinders
-        	float angles[19];
-        	driver->init(angles);
+            // Initialize the angles of rangefinders
+            float angles[19];
+            driver->init(angles);
 
-        	string initString = SimpleParser::stringify(string("init"),angles,19);
+            string initString = SimpleParser::stringify(string("init"),angles,19);
 
             
             initString.insert(0,id);
@@ -139,14 +139,14 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                 {
                     cout << "didn't get response from server...";
                 }
-				else
-				{
-                	
+                else
+                {
+                    
 
-                	if (strcmp(buf,"***identified***")==0)
-                    		break;
-            	}
-	      	}
+                    if (strcmp(buf,"***identified***")==0)
+                            break;
+                }
+            }
 
         }  while(1);
 
@@ -192,9 +192,9 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
                  * Compute The Action to send to the solorace sever
                  **************************************************/
 
-            	string action = driver->drive(string(buf));
-            	memset(buf, 0x0, UDP_MSGLEN);
-		        sprintf(buf,"%s",action.c_str());
+                string action = driver->drive(string(buf));
+                memset(buf, 0x0, UDP_MSGLEN);
+                sprintf(buf,"%s",action.c_str());
 
                 if (sendto(socketDescriptor, buf, strlen(buf)+1, 0,
                            (struct sockaddr *) &serverAddress,
@@ -211,7 +211,7 @@ void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDri
     
 
     //if (shutdownClient==false)
-	driver->onShutdown();
+    driver->onShutdown();
     CLOSE(socketDescriptor);
 
     

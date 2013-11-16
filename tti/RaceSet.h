@@ -100,6 +100,7 @@ public:
 	*/
 	void restartRound();
 		
+	double md,mt;
 
 private:
 

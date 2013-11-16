@@ -58,6 +58,8 @@ void TTI::callRace(bool callTorcs){
 	std::vector<std::thread*> tds;
 	for(int i=0;i<size;i++){
 		drivers[i]->clear();
+		drivers[i]->md=races.md;
+		drivers[i]->mt=races.mt;
 		std::thread *cl = new std::thread(client::connect,3001+i, "localhost","SCR",drivers[i]);
 		tds.push_back(cl);
 	}

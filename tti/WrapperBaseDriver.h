@@ -50,6 +50,29 @@ public:
 		lastLap=0;
 		lapTimes.clear();
 		outside=0;
+		curTick=0;
+		lastCheck=0;
+		lastDist=0;
+		zombie=false;
+		
+	}
+
+	bool isDead(){
+		if(md<=0||mt<=0)
+			return false;
+
+		if(curTick-lastCheck<mt)
+			return false;
+
+		
+		if(current.getDistRaced()-lastDist<md)
+			return true;
+
+		lastCheck=curTick;
+		lastDist=current.getDistRaced();
+
+		return false;
+
 	}
 
 	/** maintains the last received CarState */
@@ -63,6 +86,11 @@ public:
 
 	/** keeps the amount of ticks the car spent outside the track */
 	int outside=0;
+
+	long long curTick=0;
+	double md,mt;
+	double lastCheck=0, lastDist=0;
+	bool zombie=false;
 };
 
 #endif /*WRAPPERBASEDRIVER_H_*/

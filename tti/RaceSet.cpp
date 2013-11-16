@@ -90,7 +90,8 @@ void RaceSet::readConfig(std::string configXML){
 	std::string id=GfParmGetStr(parmHandle, "Header", "id", "default");
 	folder=xmlOut+id+"/";
 
-
+	md=GfParmGetNum(parmHandle, "Header", "mindist", NULL, 0);
+	mt=GfParmGetNum(parmHandle, "Header", "maxticks", NULL, 0);
 
 
 	Race r;
@@ -99,6 +100,7 @@ void RaceSet::readConfig(std::string configXML){
 	std::string track = GfParmGetStr(parmHandle, "Races/1", "track", "not found");
 
 	
+
 
 	path="Races/"+std::to_string(1);
 	
