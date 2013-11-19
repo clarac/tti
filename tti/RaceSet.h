@@ -48,7 +48,7 @@ static std::string xmlFolder = std::string(getenv("TORCS_BASE"))+ "/src/tti/setu
 */
 struct Race
 {
-	std::string track;
+	std::string track, cat;
 	int laps, distance;
 };
 

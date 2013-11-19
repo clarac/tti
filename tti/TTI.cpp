@@ -52,8 +52,7 @@ void TTI::callRace(bool callTorcs){
 	std::thread torcs;
 	
 	if(callTorcs){
-		std::string cmd = "torcs -r " + races.getNextXML();
-		p = popen(cmd.c_str(),"r");	
+		std::string cmd = "torcs -r " + races.getNextXML();		p = popen(cmd.c_str(),"r");	
 	}		
 	std::vector<std::thread*> tds;
 	for(int i=0;i<size;i++){

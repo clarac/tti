@@ -78,6 +78,7 @@ void RaceSet::genXML(){
 		GfParmSetNum(parmHandle, "Quick Race", "laps", NULL, races[i].laps);
 		GfParmSetNum(parmHandle, "Quick Race", "distance", NULL, races[i].distance);
 		GfParmSetStr(parmHandle, "Tracks/1", "name", races[i].track.c_str());
+		GfParmSetStr(parmHandle, "Tracks/1", "category", races[i].cat.c_str());
 		GfParmWriteFile((folder+"r"+std::to_string(i)+".xml").c_str(), parmHandle, NULL);
 	}
 }
@@ -111,7 +112,7 @@ void RaceSet::readConfig(std::string configXML){
 		
 		r.distance=GfParmGetNum(parmHandle, path.c_str(), "distance", NULL, 0);
 		r.laps=GfParmGetNum(parmHandle, path.c_str(), "laps", NULL, 0);
-
+		r.cat= GfParmGetStr(parmHandle, path.c_str(), "category", "road");
 		if(r.distance<=0&&r.laps<=0){
 			std::cout<<"RaceSet construction failed: invalid race length for race #"<<i<<std::endl;
 			throw 1;

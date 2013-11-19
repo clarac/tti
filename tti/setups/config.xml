@@ -6,13 +6,18 @@
   <section name="Header">
     <attstr name="id" val="teste2"/>
     <attnum name="mindist" val="40"/>
-    <attnum name="maxticks" val="5000"/>
+    <attnum name="maxticks" val="3000"/>
   </section>
 
   <section name="Races">
     <section name="1">
-      <attstr name="track" val="wheel-2"/>
-      <attnum name="laps" val="1"/>
+      <attstr name="track" val="g-track-3"/>
+      <attnum name="laps" val="2"/>
+    </section>
+    <section name="2">
+      <attstr name="track" val="michigan"/>
+      <attstr name="category" val="oval"/>
+      <attnum name="laps" val="2"/>
     </section>
   </section>
 </params>
