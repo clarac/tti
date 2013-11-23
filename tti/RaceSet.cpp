@@ -9,7 +9,7 @@
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
+    the Free Software Foundation, either version 2 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -78,7 +78,7 @@ void RaceSet::genXML(){
 		GfParmSetNum(parmHandle, "Quick Race", "laps", NULL, races[i].laps);
 		GfParmSetNum(parmHandle, "Quick Race", "distance", NULL, races[i].distance);
 		GfParmSetStr(parmHandle, "Tracks/1", "name", races[i].track.c_str());
-		GfParmSetStr(parmHandle, "Tracks/1", "category", races[i].cat.c_str());
+		GfParmSetStr(parmHandle, "Tracks/1", "category", races[i].category.c_str());
 		GfParmWriteFile((folder+"r"+std::to_string(i)+".xml").c_str(), parmHandle, NULL);
 	}
 }
@@ -112,7 +112,7 @@ void RaceSet::readConfig(std::string configXML){
 		
 		r.distance=GfParmGetNum(parmHandle, path.c_str(), "distance", NULL, 0);
 		r.laps=GfParmGetNum(parmHandle, path.c_str(), "laps", NULL, 0);
-		r.cat= GfParmGetStr(parmHandle, path.c_str(), "category", "road");
+		r.category= GfParmGetStr(parmHandle, path.c_str(), "category", "road");
 		if(r.distance<=0&&r.laps<=0){
 			std::cout<<"RaceSet construction failed: invalid race length for race #"<<i<<std::endl;
 			throw 1;

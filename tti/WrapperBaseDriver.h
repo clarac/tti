@@ -10,7 +10,7 @@
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
+    the Free Software Foundation, either version 2 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -39,6 +39,7 @@ class WrapperBaseDriver : public BaseDriver
 {
 public:
 	
+	WrapperBaseDriver() {clear();}
 	/** the drive function with string input and output */
 	virtual string drive(string sensors);
 	
@@ -85,12 +86,20 @@ public:
 	std::vector<float> lapTimes;
 
 	/** keeps the amount of ticks the car spent outside the track */
-	int outside=0;
+	int outside;
 
-	long long curTick=0;
+	/** true if driver is waiting for the race to finish */
+	bool zombie;
+
+	/** counts ticks */
+	long long curTick;
+
+	/** early termination parameters (min distance / max ticks) */
 	double md,mt;
-	double lastCheck=0, lastDist=0;
-	bool zombie=false;
+
+	/** early termination vars, checks periodically */
+	double lastCheck, lastDist;
+
 };
 
 #endif /*WRAPPERBASEDRIVER_H_*/

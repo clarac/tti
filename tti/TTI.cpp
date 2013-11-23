@@ -9,7 +9,7 @@
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
+    the Free Software Foundation, either version 2 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -32,6 +32,7 @@ TTI::TTI(std::vector<WrapperBaseDriver*> dv,std::string config, std::string fold
 	car_qty=drivers.size();
 	round=0;
 	raceIndex=0;
+	ready = false;
 	try {
 		races=RaceSet(config,car_qty,folder);
 		ready=true;
@@ -47,9 +48,6 @@ TTI::TTI(std::vector<WrapperBaseDriver*> dv,std::string config, std::string fold
 void TTI::callRace(bool callTorcs){
 	FILE *p=NULL;
 	int size = drivers.size();
-	
-
-	std::thread torcs;
 	
 	if(callTorcs){
 		std::string cmd = "torcs -r " + races.getNextXML();		p = popen(cmd.c_str(),"r");	
@@ -74,10 +72,13 @@ void TTI::callRace(bool callTorcs){
 
 	for(int i=0;i<size;i++){
 		tds[i]->join();
-
+		delete tds[i];
 	} 
 
-
+//2. TTI.cpp, callRace, ~62, "std::thread *cl = new std::thread ..." ->
+// memory leak, you join the thread below and the collection of pointers 
+	//goes out of scope and is released, but not the objects pointed to (the threads)
+	// please check. Maybe using a thread pool would be handy.
 	
 	
     
