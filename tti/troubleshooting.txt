@@ -1,23 +1,40 @@
-Some of the errors you might encounter:
+Here are listed some of the errors you might encounter, as well as how they can be fixed. First, make sure that:
 
-/usr/src/torcs/torcs-1.3.4/export/include/tgf.h:70:14: error: expected unqualified-id before numeric constant
+	- TORCS_BASE is set to the TORCS folder, example:
+		export TORCS_BASE=/usr/src/torcs/torcs-1.3.4
+
+	- MAKE_DEFAULT is set as well, example:
+		export MAKE_DEFAULT=$TORCS_BASE/Make-default.mk
+
+	- LD_LIBRARY_PATH contains ${TORCS_BASE}/export/lib or /usr/local/lib/torcs, example:
+		export LD_LIBRARY_PATH=${TORCS_BASE}/export/lib:$LD_LIBRARY_PATH
+	
+
+>> /usr/src/torcs/torcs-1.3.4/export/include/tgf.h:70:14: error: expected unqualified-id before numeric constant
 
 Solution: remove the definition of PI in SimpleDriver.h and wherever else it is present.
 
 
-error while loading shared libraries: libtti.so: cannot open shared object file: No such file or directory
+>> error while loading shared libraries: libtti.so: cannot open shared object file: No such file or directory
 
-Solution: while on the tti folder
+Solution: while on the TTI folder
 	$ make install 
 	$ export LD_LIBRARY_PATH=${TORCS_BASE}/export/lib:$LD_LIBRARY_PATH
 
 
-fatal error: tti.h: No such file or directory
+>> fatal error: TTI.h: No such file or directory
 
-Solution: while on the tti folder
+Solution: while on the TTI folder
 	$ make export
 
-If erros 2 or 3 persist, make sure your source compilation includes the flags
+
+>> cc1plus: error: unrecognized command line option ‘-std=c++11’
+
+Solution: 
+	change c++11 to c++0x in the makefile
+
+
+If erros #2 or #3 persist, make sure your source compilation includes all necessary flags:
 	-L${TORCS_BASE}/export/lib
 	-I${TORCS_BASE}/export/include
 	-ltti -ltgf -ltxml

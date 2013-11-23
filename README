@@ -1,8 +1,10 @@
 TTI is a tool developed to help the testing of TORCS drivers running in client-server mode. 
-It is under development, currently only available for linux environments with limited testing done. TTI was created by Clara Caldeira (claramcaldeira@gmail.com) and is licensed under the terms of the GNU General Public License (GPL 3).
+It is under development, currently only available for Linux environments with limited testing done. TTI was created by Clara Caldeira (claramcaldeira@gmail.com) and is licensed under the terms of the GNU General Public License (GPL 2).
 
 This library is intended for the necessary steps of performance evaluation during a process of developing algorithms for drivers, or for modifying numeric settings in order to optimize their abilities. Because TORCS's command line mode is used, and it was only introduced in v1.3.3, TTI is not compatible with earlier versions of the simulator.
 
+*Important*
+	Both a TORCS installation and a SCR patch are required,	see the [competition manual] (http://arxiv.org/pdf/1304.1672.pdf) for details.
 
 Installation:
 
@@ -27,6 +29,6 @@ For full documentation (requires Doxygen):
 	$ make doc
 
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
