@@ -7,7 +7,7 @@
 	as make your own modifications.
 */
 
-	      
+
 
 
 
@@ -23,7 +23,7 @@ int main(){
 	// Execution
 	while(!tti.getRound())
 		for(auto result : tti.race())
-			std::cout << result.avgTime << std::endl;	
+			std::cout << result << std::endl;	
 
 	return 0;    
 }

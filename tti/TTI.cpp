@@ -74,14 +74,7 @@ void TTI::callRace(bool callTorcs){
 		tds[i]->join();
 		delete tds[i];
 	} 
-
-//2. TTI.cpp, callRace, ~62, "std::thread *cl = new std::thread ..." ->
-// memory leak, you join the thread below and the collection of pointers 
-	//goes out of scope and is released, but not the objects pointed to (the threads)
-	// please check. Maybe using a thread pool would be handy.
-	
-	
-    
+ 
 
 	raceIndex=(raceIndex+1)%race_qty;
 	

@@ -4,7 +4,7 @@ It is under development, currently only available for Linux environments with li
 This library is intended for the necessary steps of performance evaluation during a process of developing algorithms for drivers, or for modifying numeric settings in order to optimize their abilities. Because TORCS's command line mode is used, and it was only introduced in v1.3.3, TTI is not compatible with earlier versions of the simulator.
 
 *Important*
-	Both a TORCS installation and a SCR patch are required,	see the [competition manual] (http://arxiv.org/pdf/1304.1672.pdf) for details.
+	Both a TORCS installation and a SCR patch are required,	see the competition manual (http://arxiv.org/pdf/1304.1672.pdf) for details.
 
 Installation:
 

@@ -166,6 +166,22 @@ struct raceData{
 	std::vector<float> timeList;
 };
 
+
+std::ostream &operator <<(std::ostream &os, const raceData &rd){
+	int laps = rd.timeList.size();
+
+	os << "*********************" << std::endl;
+	os << "Completed " << laps <<" laps" << std::endl;
+	os << "Total time: " << rd.totalTime << std::endl;
+	os << "Average time: " << rd.avgTime << std::endl;
+	for(int i=0;i<laps;i++){
+		os << "Lap #"<< i+1 << ": " << rd.timeList[i] << "s" << std::endl;
+	}
+	os << "Car damage: " << rd.damage << " points" << std::endl;
+	os << "Game ticks outside: " << rd.ticksOutside << std::endl;
+}
+
+
 /**
 * Main class, deals with drivers and data collected from races
 */
