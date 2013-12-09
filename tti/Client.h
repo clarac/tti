@@ -33,7 +33,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
-#include "WrapperBaseDriver.h"
+#include "TTIWrapperDriver.h"
 #include "SimpleParser.h"
 #include <stdio.h>
 
@@ -60,7 +60,7 @@ using namespace std;
 
 
 /** Handles the connection */
-void connect(unsigned int serverPort, string hostName, string id, WrapperBaseDriver *driver){
+void connect(unsigned int serverPort, string hostName, string id, TTIWrapperDriver *driver){
 
     SOCKET socketDescriptor;
     int numRead;

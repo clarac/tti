@@ -27,7 +27,7 @@
 
 
 
-TTI::TTI(std::vector<WrapperBaseDriver*> dv,std::string config, std::string folder){
+TTI::TTI(std::vector<TTIWrapperDriver*> dv,std::string config, std::string folder){
 	drivers=dv;
 	car_qty=drivers.size();
 	round=0;

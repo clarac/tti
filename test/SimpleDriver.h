@@ -22,12 +22,12 @@
 #include "CarState.h"
 #include "CarControl.h"
 #include "SimpleParser.h"
-#include "WrapperBaseDriver.h"
+#include "TTIWrapperDriver.h"
 
 
 using namespace std;
 
-class SimpleDriver : public WrapperBaseDriver
+class SimpleDriver : public TTIWrapperDriver
 {
 public:
 	

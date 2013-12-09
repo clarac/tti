@@ -19,29 +19,6 @@ string
 WrapperBaseDriver::drive(string sensors)
 {
 	CarState cs(sensors);
-	current=cs;
-	curTick++;
-	if(zombie){
-		CarControl cc;
-		cc.setMeta(2);
-		return cc.toString();
-	} 
-	if(isDead()){
-		clear();
-		zombie=true;
-		std::cout<<"terminated"<<std::endl;
-		CarControl cc;
-		cc.setMeta(2);
-		return cc.toString();
-	}
-	float lap = current.getLastLapTime();
-	if(lap!=lastLap){
-		lapTimes.push_back(lap);
-		lastLap=lap;
-	}
-	if(current.getTrackPos()>=1||current.getTrackPos()<=-1){
-		outside++;
-	}
 	CarControl cc = wDrive(cs);
 	return cc.toString();	
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
  
-    file                 : WrapperBaseDriver.h
+    file                 : TTIWrapperDriver.cpp
     copyright            : (C) 2007 Daniele Loiacono
  
  ***************************************************************************/
@@ -13,24 +13,37 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifndef WRAPPERBASEDRIVER_H_
-#define WRAPPERBASEDRIVER_H_
+#include "TTIWrapperDriver.h"
 
-#include "CarState.h"
-#include "CarControl.h"
-#include "BaseDriver.h"
-#include <cmath>
-#include <cstdlib>
-
-class WrapperBaseDriver : public BaseDriver
+string 
+TTIWrapperDriver::drive(string sensors)
 {
-public:
-	
-	// the drive function wiht string input and output
-	virtual string drive(string sensors);
-	
-	// drive function that exploits the CarState and CarControl wrappers as input and output.
-	virtual CarControl wDrive(CarState cs)=0;
-};
+	CarState cs(sensors);
+	current=cs;
+	curTick++;
+	if(zombie){
+		CarControl cc;
+		cc.setMeta(2);
+		return cc.toString();
+	} 
+	if(isDead()){
+		clear();
+		zombie=true;
+		std::cout<<"terminated"<<std::endl;
+		CarControl cc;
+		cc.setMeta(2);
+		return cc.toString();
+	}
+	float lap = current.getLastLapTime();
+	if(lap!=lastLap){
+		lapTimes.push_back(lap);
+		lastLap=lap;
+	}
+	if(current.getTrackPos()>=1||current.getTrackPos()<=-1){
+		outside++;
+	}
+	CarControl cc = wDrive(cs);
+	return cc.toString();	
+}
 
-#endif /*WRAPPERBASEDRIVER_H_*/
+

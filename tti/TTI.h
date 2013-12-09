@@ -45,16 +45,16 @@ Example code:
 
 \code{.cpp}
 
-	#include "tti.h"
-	#include "SimpleDriver.cpp"
+	#include "TTI.h"
+	#include "SimpleDriver.h"
 
 	int main(){
 		
 		// creating a driver object
-		TTITestDriver *d = new TTITestDriver();
+		SimpleDriver *d = new SimpleDriver();
 
 		// vector of drivers to be tested
-		std::vector<WrapperBaseDriver *> dv;
+		std::vector<TTIWrapperDriver *> dv;
 		
 		// just one driver is used in this example, but up to 10 are allowed
 		dv.push_back(d);
@@ -92,7 +92,7 @@ The example in /test only prints the data, but results are to be used in compari
 sees fit. Because references to driver objects are used, it is possible to make alterations
 between races and evaluate how performances are changed as a result.
 
-Drivers must inherit from the class WrapperBaseDriver, which is a __modified__ version of the class provided
+Drivers must inherit from the class TTIWrapperDriver, which is a __modified__ version of the class provided
 with the available TORCS C++ client. A project using TTI should import that class from ${TORCS_BASE}/export/include
 and _not_ have it as a file among other source code.
 
@@ -179,6 +179,8 @@ std::ostream &operator <<(std::ostream &os, const raceData &rd){
 	}
 	os << "Car damage: " << rd.damage << " points" << std::endl;
 	os << "Game ticks outside: " << rd.ticksOutside << std::endl;
+
+	return os;
 }
 
 
@@ -196,7 +198,7 @@ public:
 	* @param	config	path to the race configuration xml, defaults to tti/setups/config.xml
 	* @param 	folder 	path in which individual xmls will be stored, defaults to tti/setups
 	*/
-	TTI(std::vector<WrapperBaseDriver*> dv, std::string config = xmlFolder+"config.xml", std::string folder=xmlFolder);
+	TTI(std::vector<TTIWrapperDriver*> dv, std::string config = xmlFolder+"config.xml", std::string folder=xmlFolder);
 
 
 	/**
@@ -208,14 +210,17 @@ public:
 	std::vector<raceData> race();
 
 	/**
-	* Returns the number of the current round (starting at 0, incremented every time the last race in the list is completed)
-	*
+	* Returns the number of the current round 
+	* 
+	* The current round indicates how many times tti has completed the list of races 
+	* in the config file. Starting at 0, round is incremented every time the last race in the 
+	* list is completed and the next one is set to be the first.
 	* @return 0-based round number or quantity of finished rounds
 	*/
 	int getRound();
 
 	/**
-	* Makes the next race to be the first one, does not increment the number of rounds 
+	* Makes the next race to be the first one, does not change the value of round
 	*
 	*/
 	void restartRound();
@@ -235,8 +240,8 @@ private:
 	*/
 	void callRace(bool callTorcs=true);
 
-	/// array of pointers to client drivers: subclasses of \e modified WrapperBaseDriver 
-	std::vector<WrapperBaseDriver*> drivers;
+	/// array of pointers to client drivers: subclasses of \e modified TTIWrapperDriver 
+	std::vector<TTIWrapperDriver*> drivers;
 
 	/// object keeps track of the configuration and xml files for the races
 	RaceSet races;
