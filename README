@@ -17,9 +17,7 @@ Installation:
 	$ ln -s /full/path/to/tti/tti/ ${TORCS_BASE}/src/
 	
 	$ cd tti	
-	$ make
-	$ make install
-	$ make export
+	$ make tti
 	
 	to test if it works:	
 	$ make test
