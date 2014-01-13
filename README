@@ -21,10 +21,8 @@ Installation:
 	$ make install
 	$ make export
 	
-	to test if it works, go to the test folder
-	
-	$ make
-	$ ./ttest
+	to test if it works:	
+	$ make test
 	
 	after a few seconds, the results of the race should be displayed.
 	

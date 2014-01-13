@@ -15,11 +15,14 @@ LIB_DIRS := $(foreach dir, $(LIB_DIRS), -L${dir})
 LIBS = tti tgf txml
 LIBS := $(foreach lib, $(LIBS), -l${lib})
 
-TEST_TARGET = ttest
+#TEST_TARGET = ttest
+
+ifndef TEST_TARGET
+    $(error You must define the TEST_TARGET!)
+endif
 
 # Targets
 all: ${TEST_TARGET}
-
 
 ${TEST_TARGET}: ttest.o SimpleDriver.o 
 	g++ ${LIB_DIRS} -o ${TEST_TARGET} ttest.o SimpleDriver.o ${LIBS}

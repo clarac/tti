@@ -7,6 +7,8 @@
 TTI_SRC_DIR = tti
 TEST_SRC_DIR = test
 
+TEST_TARGET = ttest
+
 # TORCS_BASE, MAKE_DEFAULT, and LD_LIBRARY_PATH may already have been defined 
 # (depending on how TORCS was installed.)
 ifndef TORCS_BASE
@@ -30,8 +32,9 @@ tti: set_cxx_flag
 	$(MAKE) -C $(TTI_SRC_DIR) install CXX_STD=${CXX_STD}
 	$(MAKE) -C $(TTI_SRC_DIR) export CXX_STD=${CXX_STD}
 
-test: set_cxx_flag
-	$(MAKE) -C $(TEST_SRC_DIR) CXX_STD=${CXX_STD}
+test: tti
+	$(MAKE) -C $(TEST_SRC_DIR) CXX_STD=${CXX_STD} TEST_TARGET=${TEST_TARGET}
+	./${TEST_SRC_DIR}/${TEST_TARGET}
 
 # Set compiler flag.
 set_cxx_flag:
