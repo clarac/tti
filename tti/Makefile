@@ -10,7 +10,7 @@ SOURCES   = TTI.cpp  SimpleParser.cpp TTIWrapperDriver.cpp \
 
 # dir to which header files are exported
 
-EXPDIR  = include
+EXPDIR  = include/TTI
 
 EXPORTS = TTI.h TTIWrapperDriver.h WrapperBaseDriver.h RaceSet.h Client.h \
           CarControl.h CarState.h SimpleParser.h BaseDriver.h
