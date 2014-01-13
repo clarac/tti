@@ -8,22 +8,14 @@
 EXPDIR  = export/include
 
 INCLUDE_DIRS = ${TORCS_BASE} ${TORCS_BASE}/${EXPDIR} ${TORCS_BASE}/${EXPDIR}/TTI
-INCLUDE_DIRS := $(foreach dir, $(INCLUDE_DIRS), -I${dir})
-
-LIB_DIRS = ${TORCS_BASE}/export/lib /usr/lib
-LIB_DIRS := $(foreach dir, $(LIB_DIRS), -L${dir})
-
-LIBS = tti tgf txml
-LIBS := $(foreach lib, $(LIBS), -l${lib})
+INCLUDE_DIRS := $(foreach d, $(INCLUDE_DIRS), -I$d)
 
 ifndef TORCS_BASE
     $(error [TTI] You must define the TORCS_BASE! For example: "export TORCS_BASE=/path/to/torcs-1.3.4" or "make TORCS_BASE=/path/to/torcs-1.3.4")
 endif
 
-# Targets
-
 ttest: ttest.o SimpleDriver.o
-	g++ ${LIB_DIRS} -o ttest ttest.o SimpleDriver.o ${LIBS}
+	g++ -L${TORCS_BASE}/export/lib -L/usr/lib  -o ttest ttest.o SimpleDriver.o -ltti -ltgf -ltxml
 
 ttest.o: set_cxx_flag ttest.cpp 
 	g++ ${INCLUDE_DIRS} -std=c++${CXX_STD} -pthread -c ttest.cpp 
