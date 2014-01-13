@@ -1,0 +1,6 @@
+test/*.o
+test/ttest
+
+tti/.depend
+tti/*.o
+tti/*.so
