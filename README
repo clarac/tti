@@ -9,7 +9,7 @@ This library is intended for the necessary steps of performance evaluation durin
 Installation:
 
 	$ export TORCS_BASE=/path/to/torcs-1.3.4
-		(where you unpacked torcs-1.3.4.tar.bz2 or later version)
+		(where you unpacked torcs-1.3.4.tar.bz2)
 	$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/torcs/lib
 	$ export MAKE_DEFAULT=$TORCS_BASE/Make-default.mk	
 	
