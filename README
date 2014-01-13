@@ -14,7 +14,7 @@ Installation:
 	$ export MAKE_DEFAULT=$TORCS_BASE/Make-default.mk
 
 	Make a link in the tti folder in the TORCS folder:
-	ln -s /full/path/to/tti/tti/ ${TORCS_BASE}/src/
+	$ ln -s /full/path/to/tti/tti/ ${TORCS_BASE}/src/
 	
 	$ cd tti	
 	$ make
