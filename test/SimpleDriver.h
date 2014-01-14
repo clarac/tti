@@ -18,10 +18,10 @@
 
 #include <iostream>
 #include <cmath>
-#include "BaseDriver.h"
-#include "CarState.h"
-#include "CarControl.h"
-#include "SimpleParser.h"
+#include "scr/BaseDriver.h"
+#include "scr/CarState.h"
+#include "scr/CarControl.h"
+#include "scr/SimpleParser.h"
 #include "TTIWrapperDriver.h"
 
 

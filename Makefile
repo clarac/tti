@@ -28,6 +28,7 @@ endif
 .PHONY: tti
 
 tti: set_cxx_flag
+	mkdir -p ${TORCS_BASE}/export/include/TTI/scr
 	$(MAKE) -C $(TTI_SRC_DIR) CXX_STD=${CXX_STD}
 	$(MAKE) -C $(TTI_SRC_DIR) install CXX_STD=${CXX_STD}
 	$(MAKE) -C $(TTI_SRC_DIR) export CXX_STD=${CXX_STD}

@@ -34,7 +34,7 @@
 #include <cstdio>
 #include <cstring>
 #include "TTIWrapperDriver.h"
-#include "SimpleParser.h"
+#include "scr/SimpleParser.h"
 #include <stdio.h>
 
 using namespace std;

@@ -26,9 +26,9 @@
 #ifndef TTIWrapperDRIVER_H_
 #define TTIWrapperDRIVER_H_
 
-#include "CarState.h"
-#include "CarControl.h"
-#include "WrapperBaseDriver.h"
+#include "scr/CarState.h"
+#include "scr/CarControl.h"
+#include "scr/WrapperBaseDriver.h"
 #include <cmath>
 #include <cstdlib>
 #include <vector>
