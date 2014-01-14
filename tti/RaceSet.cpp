@@ -88,6 +88,12 @@ void RaceSet::readConfig(std::string configXML){
 	
 	void *parmHandle = GfParmReadFile(configXML.c_str(), GFPARM_RMODE_STD);
 
+	if(parmHandle==NULL){
+		std::cout<<"Error: configuration file not found or invalid"<<std::endl;
+		std::cout<<"path: "<<configXML<<std::endl;
+		exit(1);
+	}
+
 	std::string id=GfParmGetStr(parmHandle, "Header", "id", "default");
 	folder=xmlOut+id+"/";
 

@@ -5,8 +5,8 @@
 <params name="config">
   <section name="Header">
     <attstr name="id" val="teste2"/>
-    <attnum name="mindist" val="40"/>
-    <attnum name="maxticks" val="3000"/>
+    <attnum name="mindist" val="1"/>
+    <attnum name="maxticks" val="30000"/>
   </section>
 
   <section name="Races">

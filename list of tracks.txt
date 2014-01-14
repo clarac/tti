@@ -1,21 +1,52 @@
+These are the names of the tracks included in TORCS, which can be used for tests performed with TTI. Category road is the default, the other two need to be specified in the configuration file.
 
-tracks:
 
-aalborg     (dirt)     dirt-6     e-track-2  g-track-1  mixed-2
-a-speedway  dirt-4     eroad      e-track-4  Makefile   (oval)
-dirt-5      e-track-1  e-track-5  mixed-1    (road)
+Road:
 
-(dirt)
+aalborg 
+alpine-1 
+alpine-2
+brondehach
+corkscrew
+e-track-1
+e-track-2
+e-track-3
+e-track-4
+e-track-6
+eroad
+forza
+g-track-1
+g-track-2
+g-track-3
+ole-road-1
+ruudskogen               
+spring
+street-1                
+wheel-1
+wheel-2
 
-dirt-1  dirt-2  dirt-3 
+Dirt:
 
-(oval)
+dirt-1
+dirt-2
+dirt-3 
+dirt-4 
+dirt-5
+dirt-6
+mixed-1 
+mixed-2
 
-b-speedway  e-speedway  g-speedway  michigan
-c-speedway  d-speedway  f-speedway 
+Oval:
 
-(road)
+a-speedway
+b-speedway
+c-speedway
+d-speedway 
+e-speedway
+e-track-5
+f-speedway 
+g-speedway
+michigan
 
-alpine-1    corkscrew  e-track-6  g-track-3   ruudskogen  wheel-1
-alpine-2               forza      Makefile    spring      wheel-2
-brondehach  e-track-3  g-track-2  ole-road-1  street-1
+
+

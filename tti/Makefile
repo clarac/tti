@@ -5,16 +5,18 @@
 
 # Define library files.
 SOLIBRARY = libtti.so
-SOURCES   = TTI.cpp  SimpleParser.cpp TTIWrapperDriver.cpp \
-            WrapperBaseDriver.cpp CarControl.cpp CarState.cpp RaceSet.cpp
+SOURCES   = TTI.cpp  TTIWrapperDriver.cpp RaceSet.cpp 
+SOLIBS = scr/*.o
 
 # dir to which header files are exported
 EXPDIR  = include/TTI
-EXPORTS = TTI.h TTIWrapperDriver.h WrapperBaseDriver.h RaceSet.h Client.h \
-          CarControl.h CarState.h SimpleParser.h BaseDriver.h
+EXPORTS = TTI.h TTIWrapperDriver.h scr/WrapperBaseDriver.h RaceSet.h Client.h \
+          scr/CarControl.h scr/CarState.h scr/SimpleParser.h scr/BaseDriver.h
+
+SUBDIRS	= scr
 
 include ${MAKE_DEFAULT}
 
-LDFLAGS  += -std=c++${CXX_STD} -pthread
-CXXFLAGS += -std=c++${CXX_STD} -pthread
-CFLAGSD  += -std=c++${CXX_STD} -pthread
+LDFLAGS  += -std=${CXX_STD} -pthread
+CXXFLAGS += -std=${CXX_STD} -pthread
+CFLAGSD  += -std=${CXX_STD} -pthread

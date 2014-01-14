@@ -22,7 +22,8 @@ Installation:
 	to test if it works:	
 	$ make test
 	
-	after a few seconds, the results of the race should be displayed.
+	after a few seconds, the results of the race should be displayed. 
+	In test/ttest.cpp there is a simple example of usage, along with a step-by-step explanation.
 	
 For full documentation (requires Doxygen):
 
