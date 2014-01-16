@@ -23,18 +23,17 @@ ifeq (,$(findstring torcs/lib,$LD_LIBRARY_PATH))
     $(info [TTI] TORCS library dir not found in LD_LIBRARY_PATH, using "/usr/local/lib/torcs/lib".)
 endif
 
-
 # Targets
 .PHONY: tti
 
-tti: set_cxx_flag
+tti: export_variables
 	mkdir -p ${TORCS_BASE}/export/include/TTI/scr
-	$(MAKE) -C $(TTI_SRC_DIR) CXX_STD=${CXX_STD}
-	$(MAKE) -C $(TTI_SRC_DIR) install CXX_STD=${CXX_STD}
-	$(MAKE) -C $(TTI_SRC_DIR) export CXX_STD=${CXX_STD}
+	$(MAKE) -C $(TTI_SRC_DIR)
+	$(MAKE) -C $(TTI_SRC_DIR) install
+	$(MAKE) -C $(TTI_SRC_DIR) export
 
 test: tti
-	$(MAKE) -C $(TEST_SRC_DIR) CXX_STD=${CXX_STD} TEST_TARGET=${TEST_TARGET}
+	$(MAKE) -C $(TEST_SRC_DIR) TEST_TARGET=${TEST_TARGET}
 	./${TEST_SRC_DIR}/${TEST_TARGET}
 
 # Set compiler flag.
@@ -49,6 +48,12 @@ ifeq "$(GXX_GTE_47)" "1"
 else
     CXX_STD = c++0x
 endif
+
+export_variables: set_cxx_flag
+export TORCS_BASE
+export MAKE_DEFAULT
+export LD_LIBRARY_PATH
+export CXX_STD
 
 clean:
 	@$(MAKE) -C $(TTI_SRC_DIR) clean

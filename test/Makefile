@@ -6,7 +6,7 @@
 # dir to which header files are exported under ${TORCS_BASE}.
 EXPDIR  = export/include
 
-INCLUDE_DIRS = ${TORCS_BASE} ${TORCS_BASE}/${EXPDIR} ${TORCS_BASE}/${EXPDIR}/TTI
+INCLUDE_DIRS = ${TORCS_BASE}/${EXPDIR} ${TORCS_BASE}/${EXPDIR}/TTI ${TORCS_BASE}/${EXPDIR}/TTI/scr
 INCLUDE_DIRS := $(foreach dir, $(INCLUDE_DIRS), -I${dir})
 
 LIB_DIRS = ${TORCS_BASE}/export/lib /usr/lib
