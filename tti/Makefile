@@ -6,7 +6,7 @@
 # Define library files.
 SOLIBRARY = libtti.so
 SOURCES   = TTI.cpp  TTIWrapperDriver.cpp RaceSet.cpp 
-SOLIBS = scr/*.o
+LIBSPATH = scr/*.o
 
 # dir to which header files are exported
 EXPDIR  = include/TTI

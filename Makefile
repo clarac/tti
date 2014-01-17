@@ -67,7 +67,7 @@ export CXX_STD
 
 clean:
 	@$(MAKE) -C $(TTI_SRC_DIR) clean
-	@$(MAKE) -C $(TEST_SRC_DIR) clean
+	@$(MAKE) -C $(TEST_SRC_DIR) clean TEST_TARGET=${TEST_TARGET}
 
 # Build documentation
 doc: Doxyfile
