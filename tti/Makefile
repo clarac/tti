@@ -17,6 +17,6 @@ SUBDIRS	= scr
 
 include ${MAKE_DEFAULT}
 
-LDFLAGS  += -std=${CXX_STD} -pthread
-CXXFLAGS += -std=${CXX_STD} -pthread
-CFLAGSD  += -std=${CXX_STD} -pthread
+LDFLAGS  += ${CXX_STD} -pthread
+CXXFLAGS += ${CXX_STD} -pthread
+CFLAGSD  += ${CXX_STD} -pthread

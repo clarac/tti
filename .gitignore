@@ -4,3 +4,4 @@ test/ttest
 tti/.depend
 tti/*.o
 tti/*.so
+tti/scr/*.o
