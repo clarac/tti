@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE params SYSTEM "params.dtd">
+
+
+<params name="config">
+  <section name="Header">
+    <attstr name="id" val="test1"/>
+    <attnum name="mindist" val="12"/>
+    <attnum name="maxticks" val="300"/>
+  </section>
+
+  <section name="Races">
+    <section name="1">
+      <attstr name="track" val="dirt-2"/>
+      <attstr name="category" val="dirt"/>
+      <attnum name="laps" val="2"/>
+    </section>
+    <section name="2">
+      <attstr name="track" val="michigan"/>
+      <attstr name="category" val="oval"/>
+      <attnum name="laps" val="2"/>
+    </section>
+  </section>
+</params>

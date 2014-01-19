@@ -12,6 +12,8 @@ TEST_TARGET = ttest
 TORCS_BASE_DEFAULT = /usr/src/torcs/torcs-1.3.4
 TORCS_LIBRARY_PATH = /usr/local/lib/torcs/lib
 
+CONFIG_FILE = $(TEST_SRC_DIR)/config1.xml
+
 
 # TORCS_BASE, MAKE_DEFAULT, and LD_LIBRARY_PATH may already have been defined 
 # (depending on how TORCS was installed.)
@@ -22,6 +24,7 @@ TORCS_LIBRARY_PATH = /usr/local/lib/torcs/lib
 .PHONY: TTI
 
 TTI: LINK_TTI_DIR EXPORT_VARIABLES
+	mkdir -p $(TORCS_BASE)/export/include/TTI/scr
 	@$(MAKE) -C $(TTI_SRC_DIR)
 	@$(MAKE) -C $(TTI_SRC_DIR) install
 	@$(MAKE) -C $(TTI_SRC_DIR) export
@@ -30,7 +33,7 @@ tti: TTI
 
 test: TTI
 	@$(MAKE) -C $(TEST_SRC_DIR)
-	@./${TEST_SRC_DIR}/${TEST_TARGET}
+	@./${TEST_SRC_DIR}/${TEST_TARGET} ${CONFIG_FILE}
 
 
 SET_CXX_STD: 
